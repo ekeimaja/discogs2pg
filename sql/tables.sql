@@ -17,6 +17,11 @@ CREATE TABLE artist (
     data_quality text
 );
 
+CREATE TABLE countries (
+    id integer NOT NULL,
+    country text
+);
+
 CREATE TABLE label (
     id integer NOT NULL,
     name text NOT NULL,
