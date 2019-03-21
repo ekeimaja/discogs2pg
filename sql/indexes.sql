@@ -15,7 +15,7 @@ ALTER TABLE ONLY release ADD CONSTRAINT release_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY track ADD CONSTRAINT track_pkey PRIMARY KEY (release_id, idx);
 --ALTER TABLE ONLY track_artist ADD CONSTRAINT track_artist_pkey PRIMARY KEY (track_idx, release_id, artist_id);
 --ALTER TABLE ONLY track_extraartist ADD CONSTRAINT track_extraartist_pkey PRIMARY KEY (track_idx, release_id, artist_id);
-
+ALTER TABLE ONLY country ADD CONSTRAINT country_pkey PRIMARY KEY (id);
 --ALTER TABLE ONLY release_artist ADD CONSTRAINT FOREIGN KEY (release_id) REFERENCES release(id);
 --ALTER TABLE ONLY release_company ADD CONSTRAINT FOREIGN KEY (release_id) REFERENCES release(id);
 --ALTER TABLE ONLY release_extraartist ADD CONSTRAINT FOREIGN KEY (release_id) REFERENCES release(id);
@@ -24,10 +24,12 @@ ALTER TABLE ONLY track ADD CONSTRAINT track_pkey PRIMARY KEY (release_id, idx);
 --ALTER TABLE ONLY release_label ADD CONSTRAINT FOREIGN KEY (release_id) REFERENCES release(id);
 --ALTER TABLE ONLY release_video ADD CONSTRAINT FOREIGN KEY (release_id) REFERENCES release(id);
 
+ALTER TABLE ONLY release ADD column country_id INTEGER REFERENCES countries(id);
+
 CREATE INDEX master_artist_master_idx on master_artist (master_id);
 CREATE INDEX master_artist_artist_idx on master_artist (artist_id);
 CREATE INDEX release_title_idx ON release (title);
-CREATE INDEX release_country_idx ON release (country);
+CREATE INDEX release_countries_fk ON release (country_id);
 CREATE INDEX release_artist_artist_idx ON release_artist (artist_id);
 CREATE INDEX release_artist_release_idx ON release_artist (release_id);
 --This one record prevents index being created as of no interest to us we delete it
