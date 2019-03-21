@@ -1,11 +1,19 @@
 #!/bin/bash
 #set -xv
 
+##########################################################
+# NOTE: This is pre-alpha version so use with care!
+#       This is created at 2am, so the code is shitty
+#       Fixes and other improvements are welcome
+##########################################################
+
 printf "\nUpdating package list...\n"
 sudo apt-get update
 sudo apt-get install build-essential -y
 
+###################################
 # BEGINNING OF POSTGRES INSTALLING
+###################################
 sudo apt-get install curl ca-certificates -y
 
 curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
@@ -17,13 +25,17 @@ sudo apt-get update
 sudo apt-get install postgresql-11 pgadmin4 -y
 
 sudo apt-get install postgresql-server-dev-11 -y
+###################################
 # END FOR POSTGRES INSTALL
+###################################
 
 sudo apt-get install expat libexpat1-dev -y
 
 printf "\nPlease create a password for user postgres via psql\nCreate a new server in PgAdmin\n"
 
 sudo -u postgres -H -- psql
+
+# sudo -u postgres psql --command '\password postgres'
 
 read -p "Now the Haskell stack will be installed. Press ENTER to continue"
 
@@ -32,15 +44,17 @@ curl -sSL https://get.haskellstack.org/ | sh
 
 cd $HOME
 
-#LOADING OF DISCOGS2PG FILES
+####################################
+# DOWNLOADING OF DISCOGS2PG FILES
+####################################
 
-read -p "Now files of discogs2pg will be loaded, press ENTER to continue"
+read -p "Now the files of discogs2pg will be downloaded, press ENTER to continue"
 
 printf "\nLoading discogs2pg...\n"
 
 if [ ! -d "discogs2pg" ]; then
   wget https://github.com/ekeimaja/discogs2pg/archive/master.zip
-  printf "\nExtracting..."
+printf "\nExtracting..."
   unzip master.zip
   rm master.zip
   mv discogs2pg-master discogs2pg
@@ -54,7 +68,9 @@ stack install
 
 cp $HOME/.local/bin/discogs2pg $HOME/discogs2pg/
 
+##########################################
 #LOADING OF LATEST DUMPS OF DISCOGS DATA
+##########################################
 
 read -p "Next the latest dumps of Discogs will be loaded, press ENTER to continue"
 
@@ -75,6 +91,10 @@ for f in `wget -c --user-agent="$USER_AGENT" --header="$ACCEPT" -qO- $D_URL_LIST
 done
 
 wget -c --user-agent="$USER_AGENT" --header="$ACCEPT" --no-clobber --input-file=$D_TMP $TEST --progress=bar
+
+########################################
+# UPLOADING OF DUMPS AND OTHER STUFF
+########################################
 
 sudo su - postgres
 
