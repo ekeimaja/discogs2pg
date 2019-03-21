@@ -93,4 +93,4 @@ sudo -u postgres psql discogs_current < sql/indexes.sql
 sudo -u postgres psql discogs_current < sql/separate_countries.sql
 sudo -u postgres psql discogs_current < sql/release_year.sql
 
-echo "DONE"
+printf "\n\t _____   ____  _   _ ______ \n\t|  __ \ / __ \| \ | |  ____|\n\t| |  | | |  | |  \| | |__   \n\t| |  | | |  | | .   |  __|  \n\t| |__| | |__| | |\  | |____ \n\t|_____/ \____/|_| \_|______|\n\t============================\n\n"
