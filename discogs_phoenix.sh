@@ -49,7 +49,7 @@ if [ ! -d "discogs2pg" ]; then
 fi
 
 cd $HOME/discogs2pg/
-echo "Compiling..."
+printf "\nCompiling...\n"
 stack install
 # cp $HOME/.local/bin/discogs2pg $HOME/discogs2pg/	THIS OPERATION IS DEPENDING OF TRAVIS-FILE
 
