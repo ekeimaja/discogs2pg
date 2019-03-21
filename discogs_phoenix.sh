@@ -1,6 +1,10 @@
 #!/bin/bash
 #set -xv
 
+printf "\n\tRUN THIS IN VIRTUAL TERMINAL!!!\n"
+
+read -p  "You are in virtual terminal? Press ENTER to continue"
+
 cd $HOME
 
 printf "\nUpdating package list and installing dependencies...\n"
