@@ -78,7 +78,7 @@ wget -c --user-agent="$USER_AGENT" --header="$ACCEPT" --no-clobber --input-file=
 
 sudo su - postgres
 
-cd $HOME/discogs2pg/
+cd /home/$USER/discogs2pg/
 
 createdb discogs_current
 
@@ -91,3 +91,5 @@ psql discogs_current < sql/indexes.sql
 psql discogs_current < sql/separate_countries.sql
 
 psql discogs_current < sql/release_year.sql
+
+exit
