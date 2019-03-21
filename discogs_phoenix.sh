@@ -3,19 +3,19 @@
 
 cd $HOME
 
-printf "\nUpdating package list...\n"
+printf "\nUpdating package list and installing dependencies...\n"
 sudo apt-get update
 sudo apt-get install build-essential -y
 sudo apt-get install curl ca-certificates -y
-sudo apt-get install -y g++ gcc libc6-dev libffi-dev libgmp-dev make xz-utils zlib1g-dev git gnupg -y
+sudo apt-get install g++ gcc libc6-dev libffi-dev libgmp-dev make xz-utils zlib1g-dev git gnupg -y
 sudo apt-get install expat libexpat1-dev -y
 
 #######################
 # POSTGRES INSTALLING #
 #######################
-
+printf "\nInstalling PostgreSQL and PgAdmin4...\n"
 curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-sudo sh -c 'printf "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
 sudo apt-get update
 sudo apt-get install postgresql-11 pgadmin4 -y
 sudo apt-get install postgresql-server-dev-11 -y
@@ -24,7 +24,7 @@ sudo apt-get install postgresql-server-dev-11 -y
 # PASSWORD FOR POSTGRES USER #
 ##############################
 
-printf "\nPlease set a password for user postgres\n"
+printf "\nPlease set a password for postgres user\n"
 sudo -u postgres psql --command '\password postgres'
 read -p  "Create a connection to your server in PgAdmin. Press ENTER to continue"
 
@@ -42,7 +42,7 @@ curl -sSL https://get.haskellstack.org/ | sh
 if [ ! -d "discogs2pg" ]; then
 	printf "\nLoading discogs2pg files...\n"
 	wget https://github.com/ekeimaja/discogs2pg/archive/master.zip
-	rintf "\nExtracting...\n"
+	printf "\nExtracting...\n"
 	unzip master.zip
 	rm master.zip
 	mv discogs2pg-master discogs2pg
@@ -86,6 +86,7 @@ cd /home/$USER/discogs2pg/
 
 sudo -u postgres createdb discogs_current
 sudo -u postgres psql discogs_current < sql/tables.sql
+printf "\nThis will take several hours. Go and keep a long break :)\n"
 sudo -u postgres ./discogs2pg -g -d 20190301 -c dbname=discogs_current
 wait
 sudo -u postgres psql discogs_current < sql/indexes.sql
