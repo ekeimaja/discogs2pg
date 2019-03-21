@@ -1,3 +1,5 @@
+# NOTE: This fork is for my personal use only and thus heavily modified. If you really want to make a fix to some part of this fork, go ahead!
+
 Discogs to PostgreSQL
 =====================
 
