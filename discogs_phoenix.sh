@@ -1,12 +1,6 @@
 #!/bin/bash
 #set -xv
 
-############################################################
-# NOTE: This is for my personal use only and thus heavily  #
-#       modified. If you really want to make a fix to some #
-#       part of this file, go ahead!                       #
-############################################################
-
 cd $HOME
 
 printf "\nUpdating package list...\n"
