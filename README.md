@@ -1,5 +1,12 @@
 # NOTE: This fork is for my personal use only and thus heavily modified. If you really want to make a fix to some part of this fork, go ahead!
 
+discogs_phoenix.sh script is for automating the whole process. Currently it will:
+* Download and install PostgreSQL 11 & PgAdmin4
+* Download and install Haskell Stack
+* Download this repository and then compile it
+* Download the latest version of Discogs monthly dump
+* Create tables, upload dumps and create indexes
+
 Discogs to PostgreSQL
 =====================
 
