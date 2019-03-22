@@ -1,3 +1,7 @@
+ALTER TABLE ONLY country ADD CONSTRAINT country_pkey PRIMARY KEY (id);
+
+CREATE INDEX release_countries_fk ON release (country_id);
+
 WITH ins AS (
         INSERT INTO countries(country)
         SELECT DISTINCT r.country
