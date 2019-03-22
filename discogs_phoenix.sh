@@ -44,18 +44,18 @@ curl -sSL https://get.haskellstack.org/ | sh
 ###################################
 
 if [ ! -d "discogs2pg" ]; then
-	printf "\nLoading discogs2pg files...\n"
+	printf "\n\nLoading discogs2pg files...\n\n"
 	wget https://github.com/ekeimaja/discogs2pg/archive/master.zip
-	printf "\nExtracting...\n"
+	printf "\n\nExtracting...\n\n"
 	unzip master.zip
 	rm master.zip
 	mv discogs2pg-master discogs2pg
 fi
 
 cd $HOME/discogs2pg/
-printf "\nCompiling...\n"
+printf "\n\nCompiling...\n\n"
 stack install
-# cp $HOME/.local/bin/discogs2pg $HOME/discogs2pg/	THIS OPERATION IS DEPENDING OF TRAVIS-FILE
+cp $HOME/.local/bin/discogs2pg $HOME/discogs2pg/
 
 ###########################################
 # LOADING OF LATEST DUMPS OF DISCOGS DATA #
@@ -94,7 +94,10 @@ printf "\nThis will take several hours. Go and keep a long break :)\n"
 sudo -u postgres ./discogs2pg -g -d 20190301 -c dbname=discogs_current
 wait
 sudo -u postgres psql discogs_current < sql/indexes.sql
+wait
 sudo -u postgres psql discogs_current < sql/separate_countries.sql
+wait
 sudo -u postgres psql discogs_current < sql/release_year.sql
+wait
 
 printf "\n\t _____   ____  _   _ ______ \n\t|  __ \ / __ \| \ | |  ____|\n\t| |  | | |  | |  \| | |__   \n\t| |  | | |  | | .   |  __|  \n\t| |__| | |__| | |\  | |____ \n\t|_____/ \____/|_| \_|______|\n\t============================\n\n"
