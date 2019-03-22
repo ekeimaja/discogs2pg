@@ -90,14 +90,14 @@ cd /home/$USER/discogs2pg/
 
 sudo -u postgres createdb discogs_current
 sudo -u postgres psql discogs_current < sql/tables.sql
-printf "\nThis will take several hours. Go and keep a long break :)\n"
+printf "\n\nThis will take several hours. Go and keep a long break :)\n\n"
 sudo -u postgres ./discogs2pg -g -d 20190301 -c dbname=discogs_current
-wait
-sudo -u postgres psql discogs_current < sql/indexes.sql
 wait
 sudo -u postgres psql discogs_current < sql/separate_countries.sql
 wait
 sudo -u postgres psql discogs_current < sql/release_year.sql
+wait
+sudo -u postgres psql discogs_current < sql/indexes.sql
 wait
 
 printf "\n\t _____   ____  _   _ ______ \n\t|  __ \ / __ \| \ | |  ____|\n\t| |  | | |  | |  \| | |__   \n\t| |  | | |  | | .   |  __|  \n\t| |__| | |__| | |\  | |____ \n\t|_____/ \____/|_| \_|______|\n\t============================\n\n"
