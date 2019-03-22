@@ -16,13 +16,21 @@ FROM release r
 JOIN countries c ON c.id = r.country_id;
 
 ALTER TABLE release RENAME TO oldrelease;
+
 CREATE TABLE release (
-id SERIAL NOT NULL PRIMARY KEY, 
-title text, 
-country_id int,
-released text);
+    id integer NOT NULL,
+    status text,
+    title text,
+    country_id text,
+    released text,
+    notes text,
+    genres text[],
+    styles text[],
+    master_id int,
+    data_quality text
+);
 
 -- Arranging country_id column back to it's old place
-INSERT INTO release (id, title, country_id, released) SELECT id, title, country_id, released FROM oldrelease;
+INSERT INTO release (id, status, title, country_id, released, notes, genres, styles, master_id, data_quality) SELECT id, status, title, country_id, released, notes, genres, styles, master_id, data_quality FROM oldrelease;
 
 DROP TABLE IF EXISTS oldrelease;
