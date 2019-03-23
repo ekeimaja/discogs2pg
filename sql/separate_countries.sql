@@ -1,4 +1,4 @@
-ALTER TABLE ONLY country ADD CONSTRAINT country_pkey PRIMARY KEY (id);
+ALTER TABLE release ADD column country_id INTEGER REFERENCES countries(id);
 
 CREATE INDEX release_countries_fk ON release (country_id);
 
