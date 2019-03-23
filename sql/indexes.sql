@@ -23,7 +23,7 @@ ALTER TABLE ONLY track ADD CONSTRAINT track_pkey PRIMARY KEY (release_id, idx);
 --ALTER TABLE ONLY release_label ADD CONSTRAINT FOREIGN KEY (release_id) REFERENCES release(id);
 --ALTER TABLE ONLY release_video ADD CONSTRAINT FOREIGN KEY (release_id) REFERENCES release(id);
 
-ALTER TABLE ONLY release ADD column country_id INTEGER REFERENCES countries(id);
+ALTER TABLE ONLY country ADD CONSTRAINT country_pkey PRIMARY KEY (id);
 
 CREATE INDEX master_artist_master_idx on master_artist (master_id);
 CREATE INDEX master_artist_artist_idx on master_artist (artist_id);
