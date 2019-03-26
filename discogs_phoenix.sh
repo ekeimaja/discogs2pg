@@ -24,6 +24,10 @@ sudo apt-get update
 sudo apt-get install postgresql-11 pgadmin4 -y
 sudo apt-get install postgresql-server-dev-11 -y
 
+printf "\n\tUSE PGTUNER!!!\n"
+
+read -p  "Added new configs? Press ENTER to continue"
+
 ##############################
 # PASSWORD FOR POSTGRES USER #
 ##############################
